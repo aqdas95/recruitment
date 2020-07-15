@@ -1,0 +1,13 @@
+{
+  "editor.tabSize": 2,
+  "editor.renderWhitespace": "all",
+  "editor.wordWrap": "on",
+  "editor.formatOnSave": true,
+  "html.format.endWithNewline": true,
+  "html.format.indentHandlebars": true,
+  "html.format.indentInnerHtml": true
+}
+
+// install the Following extensions in vsCode
+// ext install esbenp.prettier-vscode
+// ext install EditorConfig
