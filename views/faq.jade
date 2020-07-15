@@ -1,0 +1,21 @@
+doctype html
+html(lang="en")
+head
+	title FAQ
+	meta(charset="utf-8")
+	meta(name="viewport" content="width=device-width, initial-scale=1")
+	link(rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css")
+body
+	.container-fluid
+		h3(style="text-align: center;")
+			strong
+				u FAQ’s
+		br
+		each faq in data
+			h4
+				strong=faq.section
+			each questAns, index in faq.questionsAns
+				h4
+					strong Q#{index+1}. #{questAns.question}
+				!{questAns.answer}
+				br
