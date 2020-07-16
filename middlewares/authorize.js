@@ -23,26 +23,4 @@ module.exports = async (req, res, next) => {
 
   if (session) next();
   else throw Error(responseMessages.M_2);
-
-  // jwt.verify(token, process.env.SECRET, function (err, decoded) {
-  //   if (err) throw Error(responseMessages.M_2);
-
-  //   req.body.profileId = decoded["profileId"];
-  //   req.body.roleId = decoded["roleId"];
-  //   req.body.loginUserId = decoded["userId"];
-
-  //   models.UserSessions.findOne({
-  //     where: {
-  //       jwtToken: token,
-  //       isLogedIn: true,
-  //     },
-  //   })
-  //     .then(function (session) {
-  //       if (session) next();
-  //       else throw Error(responseMessages.M_2);
-  //     })
-  //     .catch(function (err) {
-  //       throw Error(err.message);
-  //     });
-  // });
 };
