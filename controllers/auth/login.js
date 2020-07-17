@@ -14,11 +14,10 @@ const {
   CandidateCompliancePoliceCheckChangeRequest,
 } = require("../../models");
 
-const { rolesObj, StatusEnum, HttpError } = require("../../config/enums");
+const { rolesObj, StatusEnum, HttpError } = require("../../common/enums");
 
 module.exports = async (req, res) => {
-  const { error } = validateRequestBody(req.body);
-  if (error) throw new HttpError(400, error.message);
+  validateRequestBody(req.body);
 
   const user = await Users.findOne({
     where: {
@@ -102,12 +101,12 @@ module.exports = async (req, res) => {
     const lastActive = moment(compliance.lastActiveStatus).format("YYYY-MM-DD");
     const currente_date = moment().format("YYYY-MM-DD");
 
-    console.log(
-      "---- compliance.lastActiveStatus < updated_date -------" +
-        lastActive +
-        " < " +
-        currente_date
-    );
+    // console.log(
+    //   "---- compliance.lastActiveStatus < updated_date -------" +
+    //     lastActive +
+    //     " < " +
+    //     currente_date
+    // );
 
     if (lastActive < currente_date) {
       await clearComplianceTaskAssignment(compliance.id);
@@ -200,5 +199,9 @@ function validateRequestBody(req) {
     role: Joi.string().required(),
   }).options({ allowUnknown: true });
 
-  return schema.validate(req);
+  const { error } = schema.validate(req);
+  if (error) {
+    if (error) throw new HttpError(400, error.message);
+  }
+  return;
 }

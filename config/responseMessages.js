@@ -146,7 +146,7 @@ module.exports = responseMessages = {
   M_130: "Success, Vacancy successfully added with number", // not included
   M_131:
     "A vacancy already exists for this client using the same Client/Portal Reference Number.",
-  M_132: "user Not found",
+  M_132: "User not found",
   M_133: "success,  Loged Out",
   M_134: "Fail, not Loged Out ",
   M_135: "Fail, Invalid Site Code.",
@@ -203,8 +203,8 @@ module.exports = responseMessages = {
   M_187: "Please enter correct current password",
   M_188: "Email Not Exist",
   M_189: "You Are Not Active",
-  M_190: "token expire",
-  M_191: "wrong token",
+  M_190: "Your token is expire",
+  M_191: "Invalid token",
   M_192: "password updated",
   M_193: "Fail, your changes not successfully under process.",
   M_194:
@@ -224,5 +224,5 @@ module.exports = responseMessages = {
   M_207: "unable to find any record",
   M_208: "Success, status successfully update",
   M_209: "Fail, Some of the date is invalid",
-  M_210: "",
+  M_210: "Token is Valid",
 };

@@ -2,7 +2,7 @@ require("express-async-errors");
 
 const jwt = require("jsonwebtoken");
 const responseMessages = require("../config/responseMessages");
-const UserSessions = require("../models").UserSessions;
+const { UserSessions } = require("../models");
 
 module.exports = async (req, res, next) => {
   const token = req.headers["x-access-token"] || req.query.xt;
