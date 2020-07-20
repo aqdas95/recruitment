@@ -4,11 +4,13 @@ const path = require("path");
 const cookieParser = require("cookie-parser");
 const logger = require("morgan");
 const jsend = require("jsend");
+const cors = require("cors");
 const errorHandler = require("./middlewares/errors");
 
 const setRoutes = require("./routes");
 
 const app = express();
+app.use(cors());
 
 // view engine setup
 app.set("views", path.join(__dirname, "views"));
