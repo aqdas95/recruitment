@@ -2,9 +2,9 @@ const Joi = require("@hapi/joi");
 const randomstring = require("randomstring");
 
 const mailer = require("../../common/mailer");
+const HttpError = require("../../common/httpError");
 
 const { Users } = require("../../models");
-const { HttpError } = require("../../common/enums");
 const { getCurrentDate } = require("../../common/dates");
 const { system_generated_email } = require("../../config/globals");
 

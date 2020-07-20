@@ -2,8 +2,8 @@ const bcrypt = require("bcrypt-nodejs");
 const Joi = require("@hapi/joi");
 
 const responseMessages = require("../../config/responseMessages");
+const HttpError = require("../../common/httpError");
 
-const { HttpError } = require("../../common/enums");
 const { Users } = require("../../models");
 
 module.exports = async (req, res) => {

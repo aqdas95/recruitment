@@ -1,12 +1,3 @@
-class HttpError extends Error {
-  constructor(code, message) {
-    super(message);
-    this.code = code;
-  }
-}
-
-module.exports.HttpError = HttpError;
-
 module.exports.rolesObj = {
   admin: 1,
   recruiter: 2,

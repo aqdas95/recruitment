@@ -1,9 +1,9 @@
 const Joi = require("@hapi/joi");
 
 const responseMessages = require("../../config/responseMessages");
+const HttpError = require("../../common/httpError");
 
 const { Users } = require("../../models");
-const { HttpError } = require("../../common/enums");
 const { getCurrentDate } = require("../../common/dates");
 const { token_valid_time } = require("../../config/globals");
 

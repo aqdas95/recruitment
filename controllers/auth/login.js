@@ -2,6 +2,9 @@ const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt-nodejs");
 const moment = require("moment");
 const Joi = require("@hapi/joi");
+const log = require("debug")("app:auth/login");
+
+const HttpError = require("../../common/httpError");
 
 const {
   Users,
@@ -14,7 +17,7 @@ const {
   CandidateCompliancePoliceCheckChangeRequest,
 } = require("../../models");
 
-const { rolesObj, StatusEnum, HttpError } = require("../../common/enums");
+const { rolesObj, StatusEnum } = require("../../common/enums");
 
 module.exports = async (req, res) => {
   validateRequestBody(req.body);
@@ -62,15 +65,16 @@ module.exports = async (req, res) => {
       lastLoginTime: new Date(),
     });
 
-    if (userSession) {
-      return res.status(200).jsend.success({
-        success: true,
-        token: token,
-        teamId: recruiter.teamId,
-        candidateColor: recruiter.candidateColor,
-      });
-    } else throw new HttpError(500, "User Session Creation Error");
+    if (!userSession) throw new HttpError(500, "User Session Creation Error");
+
+    return res.status(200).jsend.success({
+      success: true,
+      token: token,
+      teamId: recruiter.teamId,
+      candidateColor: recruiter.candidateColor,
+    });
   }
+
   if (
     user.roleId === rolesObj.compliance ||
     user.roleId === rolesObj.superCompliance
@@ -101,27 +105,23 @@ module.exports = async (req, res) => {
     const lastActive = moment(compliance.lastActiveStatus).format("YYYY-MM-DD");
     const currente_date = moment().format("YYYY-MM-DD");
 
-    // console.log(
-    //   "---- compliance.lastActiveStatus < updated_date -------" +
-    //     lastActive +
-    //     " < " +
-    //     currente_date
-    // );
+    log(
+      "---- compliance.lastActiveStatus < updated_date -------" +
+        lastActive +
+        " < " +
+        currente_date
+    );
 
     if (lastActive < currente_date) {
       await clearComplianceTaskAssignment(compliance.id);
       await updateComplianceLastActiveStatus(compliance.id);
-      res.status(200).jsend.success({
-        success: true,
-        token: token,
-      });
     } else {
       await updateComplianceLastActiveStatus(compliance.id);
-      res.status(200).jsend.success({
-        success: true,
-        token: token,
-      });
     }
+    res.status(200).jsend.success({
+      success: true,
+      token: token,
+    });
   }
 };
 
@@ -146,7 +146,7 @@ function clearComplianceTaskAssignment(complianceId) {
       },
       {
         where: {
-          AssignTo: complianceid,
+          AssignTo: complianceId,
         },
       }
     ),

@@ -2,9 +2,9 @@ const Joi = require("@hapi/joi");
 const bcrypt = require("bcrypt-nodejs");
 
 const responseMessages = require("../../config/responseMessages");
+const HttpError = require("../../common/httpError");
 
 const { Users } = require("../../models");
-const { HttpError } = require("../../common/enums");
 
 module.exports = async (req, res) => {
   validateRequestBody(req.body);
