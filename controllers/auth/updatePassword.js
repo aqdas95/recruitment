@@ -9,17 +9,16 @@ const { Users } = require("../../models");
 module.exports = async (req, res) => {
   validateRequestBody(req.body);
 
-  let user = await Users.findOne({
-    where: {
-      id: req.body.id,
-    },
+  const { id, password } = req.body;
+
+  let user = await Users.findByPk(id, {
     attributes: ["id", "username", "roleId"],
   });
 
   if (!user) throw new HttpError(400, responseMessages.M_188);
 
   await user.update({
-    password: bcrypt.hashSync(req.body.password, process.env.SALT),
+    password: bcrypt.hashSync(password, process.env.SALT),
   });
 
   res.status(200).jsend.success({

@@ -18,3 +18,13 @@ module.exports.StatusEnum = {
   Valid: "Valid",
   Missing: "Missing",
 };
+
+module.exports.constants = {
+  paginationLimit: 30,
+};
+
+module.exports.VacancyTypesID = {
+  shortTerm: 0,
+  longTerm: 1,
+  Permanent: 2,
+};

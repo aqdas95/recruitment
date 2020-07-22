@@ -18,8 +18,7 @@ module.exports = async (req, res) => {
   validateRequestBody(req.body);
 
   const lower_userName = req.body.email.toLowerCase();
-  const roleId = req.body.roleId;
-  const isFuse = req.body.isFuse;
+  const { roleId, isFuse } = req.body;
 
   const user = await Users.findOne({
     where: {
@@ -33,7 +32,7 @@ module.exports = async (req, res) => {
 
   const token = randomstring.generate(15);
 
-  const link = isFuse
+  let link = isFuse
     ? url_redirect_password_verification_fuse
     : url_redirect_password_verification;
 
@@ -56,7 +55,7 @@ module.exports = async (req, res) => {
 
   res.status(200).jsend.success({
     status: 200,
-    data: "",
+    data: null,
     message: "Email Sent",
   });
 };

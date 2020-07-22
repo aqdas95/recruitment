@@ -29,6 +29,17 @@ module.exports = function (sequelize, DataTypes) {
         type: DataTypes.STRING,
         allowNull: true,
       },
+      title: {
+        type: DataTypes.VIRTUAL,
+        get() {
+          return `${this.firstName} ${this.lastName}`.replace(/\w\S*/g, (w) =>
+            w.replace(/^\w/, (c) => c.toUpperCase())
+          );
+        },
+        set(value) {
+          throw new Error("Do not try to set the `fullName` value!");
+        },
+      },
       teamId: {
         type: DataTypes.INTEGER,
         allowNull: true,

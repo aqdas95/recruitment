@@ -10,11 +10,13 @@ const { token_valid_time } = require("../../config/globals");
 module.exports = async (req, res) => {
   validateRequestBody(req.body);
 
-  const user = await Users.findOne({ where: { id: req.body.id } });
+  const { id, token } = req.body;
+
+  const user = await Users.findByPk(id);
 
   if (!user) throw new HttpError(400, responseMessages.M_132);
 
-  if (req.body.token !== user.resetPasswordToken)
+  if (token !== user.resetPasswordToken)
     throw new HttpError(400, responseMessages.M_191);
 
   if (
