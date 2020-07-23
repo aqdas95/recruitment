@@ -44,9 +44,7 @@ module.exports = async (req, res) => {
     user.roleId === rolesObj.restrictedUser ||
     user.roleId === rolesObj.admin
   ) {
-    const recruiter = await RecruiterProfiles.findOne({
-      where: { userId: user.id },
-    });
+    const recruiter = await RecruiterProfiles.findByPk(user.id);
 
     const token = jwt.sign(
       {
@@ -79,9 +77,7 @@ module.exports = async (req, res) => {
     user.roleId === rolesObj.compliance ||
     user.roleId === rolesObj.superCompliance
   ) {
-    const compliance = await ComplianceProfiles.findOne({
-      where: { userId: user.id },
-    });
+    const compliance = await ComplianceProfiles.findByPk(user.id);
 
     const token = jwt.sign(
       {

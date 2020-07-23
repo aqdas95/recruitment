@@ -225,4 +225,5 @@ module.exports = responseMessages = {
   M_208: "Success, status successfully update",
   M_209: "Fail, Some of the date is invalid",
   M_210: "Token is Valid",
+  M_211: "Fail, File does not exist",
 };

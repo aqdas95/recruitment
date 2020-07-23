@@ -9,15 +9,10 @@ const { Users } = require("../../models");
 module.exports = async (req, res) => {
   validateRequestBody(req.body);
 
-  let userId = req.body.loginUserId;
-  let password = req.body.password;
-  let newPassword = req.body.newPassword;
+  let { userId, password, newPassword } = req.body;
 
-  const user = await Users.findOne({
+  const user = await Users.findByPk(userId, {
     attributes: ["id", "username", "roleId", "password"],
-    where: {
-      id: userId,
-    },
   });
 
   if (!user) throw new HttpError(400, responseMessages.M_200);
