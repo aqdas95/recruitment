@@ -40,7 +40,8 @@ module.exports = (sequelize, DataTypes) => {
   });
   VacancyShifts.associate = function (models) {
     VacancyShifts.belongsTo(models.Vacancies, {
-      as: "Vacancies",
+      // as: "Vacancies",
+      as: "VacancyShifts",
       onDelete: "CASCADE",
       foreignKey: "vacancieId",
     });

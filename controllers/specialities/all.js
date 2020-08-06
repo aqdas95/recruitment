@@ -1,7 +1,7 @@
 const log = require("debug")("app:specialties/all");
 
 const { Specialities } = require("../../models");
-const Joi = require("@hapi/joi");
+const Joi = require("joi");
 const HttpError = require("../../common/httpError");
 
 module.exports = async (req, res) => {
@@ -12,6 +12,8 @@ module.exports = async (req, res) => {
     order: [["id", "DESC"]],
     attributes: ["id", ["description", "title"]],
     where,
+    raw: true,
+    nest: true,
   });
 
   res.status(200).jsend.success({

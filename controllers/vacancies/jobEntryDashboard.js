@@ -4,7 +4,7 @@ const { Vacancies } = require("../../models");
 
 module.exports = async (req, res) => {
   log("HREER");
-  const { loginUserId } = req.body;
+  const { loginUserId } = req.session;
   const totalVacancies = await Vacancies.count();
   const totalCreated = await Vacancies.count({
     where: { userId: loginUserId },

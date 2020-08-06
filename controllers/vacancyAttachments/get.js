@@ -24,5 +24,5 @@ module.exports = async (req, res) => {
 
   if (!fs.existsSync(path)) throw new HttpError(404, responseMessages.M_211);
 
-  res.status(200).download(path, obj_json.modifiedFileName);
+  res.status(200).download(path, vacancyAttachment.modifiedFileName);
 };

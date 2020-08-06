@@ -1,4 +1,4 @@
-const Joi = require("@hapi/joi");
+const Joi = require("joi");
 const bcrypt = require("bcrypt-nodejs");
 
 const responseMessages = require("../../config/responseMessages");

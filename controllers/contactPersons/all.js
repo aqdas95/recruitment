@@ -1,16 +1,24 @@
-const log = require("debug")("app:hospitalSubSites/all");
+const log = require("debug")("app:contactPersons/all");
 
 const Joi = require("joi");
 const HttpError = require("../../common/httpError");
 
-const { HospitalSubSites } = require("../../models");
+const { ContactPerson } = require("../../models");
 
 module.exports = async (req, res) => {
+  log(":P");
   const { query: where } = req;
   validateRequestQuery(where);
 
-  const subsites = await HospitalSubSites.findAll({
-    attributes: ["id", ["name", "title"]],
+  const contactPersons = await ContactPerson.findAll({
+    attributes: [
+      "id",
+      "hospitalSubSitesId",
+      ["name", "title"],
+      "email",
+      "phone",
+      "address",
+    ],
     order: [["id", "DESC"]],
     where,
     raw: true,
@@ -18,14 +26,14 @@ module.exports = async (req, res) => {
   });
 
   res.status(200).jsend.success({
-    subsites,
+    contactPersons,
   });
 };
 
 function validateRequestQuery(req) {
   const schema = Joi.object({
     isActive: Joi.boolean().optional(),
-    hospitalId: Joi.number().optional(),
+    hospitalSubSitesId: Joi.number().optional(),
   }).options({ allowUnknown: false });
 
   const { error } = schema.validate(req);

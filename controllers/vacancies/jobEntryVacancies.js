@@ -1,11 +1,10 @@
-const Joi = require("@hapi/joi");
+const Joi = require("joi");
 const log = require("debug")("app:vacancies/jobEntrySearchAllVacancy");
 
 const HttpError = require("../../common/httpError");
 
 const { Vacancies } = require("../../models");
 const { constants } = require("../../common/enums");
-const { constant } = require("lodash");
 
 module.exports = async (req, res) => {
   validateRequestParams(req.body);

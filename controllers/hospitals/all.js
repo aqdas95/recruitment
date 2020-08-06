@@ -1,6 +1,6 @@
 const log = require("debug")("app:hospitals/all");
 
-const Joi = require("@hapi/joi");
+const Joi = require("joi");
 const HttpError = require("../../common/httpError");
 
 const { Hospitals } = require("../../models");
@@ -13,8 +13,11 @@ module.exports = async (req, res) => {
     order: [["id", "DESC"]],
     attributes: ["id", ["name", "title"]],
     where,
+    raw: true,
+    // nest: true,
   });
 
+  // log(hospitals);
   res.status(200).jsend.success({
     hospitals,
   });

@@ -1,7 +1,7 @@
 const log = require("debug")("app:recruiterProfiles/all");
 
 const { RecruiterProfiles, Users } = require("../../models");
-const Joi = require("@hapi/joi");
+const Joi = require("joi");
 const HttpError = require("../../common/httpError");
 
 module.exports = async (req, res) => {

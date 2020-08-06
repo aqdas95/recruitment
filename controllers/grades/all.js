@@ -1,5 +1,5 @@
 const log = require("debug")("app:grades/all");
-const Joi = require("@hapi/joi");
+const Joi = require("joi");
 const HttpError = require("../../common/httpError");
 
 const { Grades } = require("../../models");
@@ -12,6 +12,8 @@ module.exports = async (req, res) => {
     order: [["id", "DESC"]],
     attributes: ["id", ["description", "title"]],
     where,
+    raw: true,
+    nest: true,
   });
 
   res.status(200).jsend.success({

@@ -1,7 +1,7 @@
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt-nodejs");
 const moment = require("moment");
-const Joi = require("@hapi/joi");
+const Joi = require("joi");
 const log = require("debug")("app:auth/login");
 
 const HttpError = require("../../common/httpError");
@@ -44,7 +44,9 @@ module.exports = async (req, res) => {
     user.roleId === rolesObj.restrictedUser ||
     user.roleId === rolesObj.admin
   ) {
-    const recruiter = await RecruiterProfiles.findByPk(user.id);
+    const recruiter = await RecruiterProfiles.findOne({
+      where: { userId: user.id },
+    });
 
     const token = jwt.sign(
       {

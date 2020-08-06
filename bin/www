@@ -7,6 +7,7 @@
 var app = require("../app");
 var debug = require("debug")("app:info");
 var http = require("http");
+const { sequelize } = require("../models");
 
 /**
  * Get port from environment and store in Express.
@@ -20,6 +21,19 @@ app.set("port", port);
  */
 
 var server = http.createServer(app);
+
+/**
+ * Check Database Connection.
+ */
+sequelize
+  .authenticate()
+  .then(() => {
+    debug("Database connection has been established successfully.");
+  })
+  .catch((err) => {
+    debug("Unable to connect to the database:", err);
+    process.exit(1);
+  });
 
 /**
  * Listen on provided port, on all network interfaces.

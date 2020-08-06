@@ -1,12 +1,12 @@
 const express = require("express");
 const router = express.Router();
 
-const { all, create } = require("../controllers/portals");
+const { all, create } = require("../controllers/contactPersons");
 
-// portals
+// contact-persons
 router.get("/", all);
 
-// portals
+// contact-persons
 router.post("/", create);
 
 module.exports = router;

@@ -6,10 +6,11 @@ const authRouter = require("./auth");
 
 const areaRouter = require("./areas");
 const brandRouter = require("./brands");
+const contactPersonRouter = require("./contactPersons");
 const documentRouter = require("./documents");
 const gradeRouter = require("./grades");
 const hospitalRouter = require("./hospitals");
-const hospitalSubsiteRouter = require("./hospitalSubsites");
+const hospitalSubsiteRouter = require("./hospitalSubSites");
 const portalRouter = require("./portals");
 const recruiterProfileRouter = require("./recruiterProfiles");
 const specialityRouter = require("./specialities");
@@ -26,15 +27,16 @@ module.exports = (app) => {
   app.use("/page", staticRouter);
   app.use("/auth", authRouter);
 
+  app.use("/portals", portalRouter);
+  app.use("/hospitals", hospitalRouter);
   app.use(authMiddleware);
 
   app.use("/areas", areaRouter);
   app.use("/brands", brandRouter);
+  app.use("/contact-persons", contactPersonRouter);
   app.use("/documents", documentRouter);
   app.use("/grades", gradeRouter);
-  app.use("/hospitals", hospitalRouter);
   app.use("/hospital-sub-sites", hospitalSubsiteRouter);
-  app.use("/portals", portalRouter);
   app.use("/recruiter-profiles", recruiterProfileRouter);
   app.use("/specialities", specialityRouter);
   app.use("/vacancies", vacancyRouter);

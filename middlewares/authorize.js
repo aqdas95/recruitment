@@ -10,9 +10,15 @@ module.exports = async (req, res, next) => {
 
   const decoded = jwt.verify(token, process.env.SECRET);
 
-  req.body.profileId = decoded["profileId"];
-  req.body.roleId = decoded["roleId"];
-  req.body.loginUserId = decoded["userId"];
+  // req.session.profileId = decoded["profileId"];
+  // req.session.roleId = decoded["roleId"];
+  // req.session.loginUserId = decoded["userId"];
+
+  req.session = {
+    profileId: decoded["profileId"],
+    roleId: decoded["roleId"],
+    loginUserId: decoded["userId"],
+  };
 
   const session = await UserSessions.findOne({
     where: {

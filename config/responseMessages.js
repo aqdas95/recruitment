@@ -226,4 +226,6 @@ module.exports = responseMessages = {
   M_209: "Fail, Some of the date is invalid",
   M_210: "Token is Valid",
   M_211: "Fail, File does not exist",
+  M_212:
+    "Duplicate entry, do you really want to create a new job with same details?",
 };
